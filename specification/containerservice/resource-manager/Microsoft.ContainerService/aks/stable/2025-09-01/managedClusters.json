@@ -6084,8 +6084,7 @@
           "description": "The Availability zone in which machine is located.",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       },
       "allOf": [

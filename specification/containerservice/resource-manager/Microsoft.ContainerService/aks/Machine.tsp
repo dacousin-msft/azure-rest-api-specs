@@ -26,7 +26,6 @@ model Machine is Azure.ResourceManager.ProxyResource<MachineProperties> {
    * The Availability zone in which machine is located.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
   zones?: string[];
 }
 
