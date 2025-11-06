@@ -118,12 +118,18 @@ interface AgentPools {
    * Upgrading the node image version of an agent pool applies the newest OS and runtime updates to the nodes. AKS provides one new image per week with the latest updates. For more details on node image versions, see: https://docs.microsoft.com/azure/aks/node-image-upgrade
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  upgradeNodeImageVersion is ArmResourceActionAsync<
+  upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
     void,
-    OkResponse,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
+    {
+      ...AcceptedResponse;
+      ...ArmAsyncOperationHeader<FinalResult = void>;
+      ...Azure.Core.Foundations.RetryAfterHeader;
+
+      @body
+      body: AgentPool;
+    } | OkResponse,
+    Foundations.DefaultBaseParameters<AgentPool>
   >;
 
   /**
